@@ -1,19 +1,21 @@
-const input = document.querySelector('input')
-const p = document.querySelector('p')
+const circle = document.querySelector('.circle')
+const wrapper = document.querySelector('.wrapper')
+let idAnimation
 
-const debounce = (fn, ms) => {
-    let timeout;
-    return function () {
-        const fnCall = () => { fn.apply(this, arguments) }
-        clearTimeout(timeout);
-        timeout = setTimeout(fnCall, ms)
-    };
+
+const changeCircle = () => {
+    if (circle.clientWidth < wrapper.clientWidth && circle.clientHeight < wrapper.clientHeight) {
+        circle.style.width = circle.clientWidth + 1 + 'px'
+        circle.style.height = circle.clientHeight + 1 + 'px'
+        console.log(circle.clientWidth);
+    }
+    console.log(circle.clientWidth);
+    idAnimation = requestAnimationFrame(changeCircle)
 }
 
-const changeP = debounce(() => {
-    p.textContent = input.value
-}, 300)
+changeCircle()
 
-input.addEventListener('input', changeP)
+
+
 
 
